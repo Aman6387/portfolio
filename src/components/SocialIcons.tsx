@@ -58,7 +58,6 @@ const SocialIcons = () => {
         href={portfolio.resumeUrl}
         target="_blank"
         rel="noopener noreferrer"
-        download="Aman_Pandey_Resume.pdf"
       >
         RESUME
         <span>
