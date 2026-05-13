@@ -1,5 +1,7 @@
 const base = import.meta.env.BASE_URL;
 const liveSite = "https://aman6387.github.io/portfolio/";
+const platformerRelease =
+  "https://github.com/Aman6387/portfolio/releases/tag/VersionTag(v1.0.1)";
 
 export type Project = {
   title: string;
@@ -103,9 +105,9 @@ export const portfolio = {
         `${base}images/projects/2DRunner_1.jfif`,
         `${base}images/projects/2DRunner_2.jfif`,
       ],
-      link: liveSite,
-      demo: liveSite,
-      github: "https://github.com/Aman6387",
+      link: platformerRelease,
+      demo: platformerRelease,
+      github: "https://github.com/Aman6387/portfolio",
     },
     {
       title: "Contactoo — Smart Contact Manager",
