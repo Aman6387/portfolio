@@ -81,7 +81,7 @@
   height: 120px;
   background: linear-gradient(0deg, transparent, var(--backgroundColor) 70%);
   pointer-events: none;
-  z-index: 12;
+  z-index: 8;
 }
 
 @keyframes circleDrift {

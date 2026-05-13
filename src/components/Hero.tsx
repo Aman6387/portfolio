@@ -12,17 +12,35 @@ type HeroProps = {
 const Hero = ({ animStart = true }: HeroProps) => {
   useEffect(() => {
     if (!animStart) return;
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const targets = ".landing-intro, .landing-info";
+
     const ctx = gsap.context(() => {
-      gsap.from(".landing-intro, .landing-info", {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.15,
-        delay: 2.6,
-        ease: "power2.out",
-      });
+      gsap.fromTo(
+        targets,
+        { opacity: 0, y: isMobile ? 14 : 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: isMobile ? 0.55 : 0.8,
+          stagger: 0.12,
+          delay: isMobile ? 0.25 : 2.6,
+          ease: "power2.out",
+          overwrite: "auto",
+        }
+      );
     });
-    return () => ctx.revert();
+
+    const fallback = window.setTimeout(() => {
+      gsap.set(targets, { opacity: 1, y: 0, clearProps: "transform" });
+    }, isMobile ? 1800 : 4500);
+
+    return () => {
+      window.clearTimeout(fallback);
+      ctx.revert();
+      gsap.set(targets, { opacity: 1, y: 0, clearProps: "transform" });
+    };
   }, [animStart]);
 
   return (
@@ -36,17 +54,17 @@ const Hero = ({ animStart = true }: HeroProps) => {
             <span>{portfolio.name.split(" ")[1]}</span>
           </h1>
         </div>
+        <div className="hero-canvas-layer">
+          <Suspense fallback={null}>
+            <HeroScene start={animStart} />
+          </Suspense>
+        </div>
         <div className="landing-info">
           <h3>A Unity</h3>
           <h2 className="landing-info-h2">
             <span>Game</span>
             <span>Developer</span>
           </h2>
-        </div>
-        <div className="hero-canvas-layer">
-          <Suspense fallback={null}>
-            <HeroScene start={animStart} />
-          </Suspense>
         </div>
       </div>
     </section>

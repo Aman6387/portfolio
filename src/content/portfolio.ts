@@ -1,4 +1,19 @@
 const base = import.meta.env.BASE_URL;
+const liveSite = "https://aman6387.github.io/portfolio/";
+
+export type Project = {
+  title: string;
+  category: string;
+  description: string;
+  featured?: boolean;
+  features: string[];
+  techStack: string[];
+  tools: string[];
+  images: string[];
+  link: string;
+  github?: string;
+  demo?: string;
+};
 
 export const portfolio = {
   name: "Aman Pandey",
@@ -6,7 +21,7 @@ export const portfolio = {
   role: "Unity Game Developer",
   tagline: "I build 2D & 3D games and ship them across mobile and desktop.",
   location: "Ahmedabad, India",
-  yearsFocus: "2+ yrs Unity",
+  yearsFocus: "3+ yrs Unity",
   email: "aman.pandey12062002@gmail.com",
   phone: "+91 63870 00490",
   linkedin: "https://www.linkedin.com/in/aman6387",
@@ -62,26 +77,54 @@ export const portfolio = {
     {
       title: "2D Platformer Adventure Game",
       category: "Android · Unity 2D",
+      featured: true,
       description:
-        "Unity 2D, C#, Physics2D, Tilemap, Animator, touch controls, prefabs, sprite atlasing, mobile FPS tuning.",
-      image: `${base}images/projects/platformer.svg`,
-      link: "https://www.linkedin.com/in/aman6387",
+        "A fast-paced 2D platformer adventure game with smooth controls, challenging enemies, coin collection, and multiple levels.",
+      features: [
+        "Smooth touch & joystick controls",
+        "Multiple levels with unique environments",
+        "Enemy AI & player animations",
+        "Coin system & score tracking",
+        "Mobile optimized performance",
+      ],
+      techStack: [
+        "Unity 2D",
+        "C#",
+        "Physics2D",
+        "Tilemap",
+        "Animator",
+        "Prefabs",
+        "Sprite Atlas",
+        "Touch Controls",
+        "Mobile FPS Tuning",
+      ],
+      tools: ["Unity", "Visual Studio", "Aseprite", "Tiled", "Git", "Android Build"],
+      images: [
+        `${base}images/projects/2DRunner_1.jfif`,
+        `${base}images/projects/2DRunner_2.jfif`,
+      ],
+      link: liveSite,
+      demo: liveSite,
+      github: "https://github.com/Aman6387",
     },
     {
       title: "Contactoo — Smart Contact Manager",
       category: "Full-stack · Java · React",
       description:
-        "Java, Spring Boot, React, MySQL, REST APIs, responsive UI, CRUD workflows, team delivery.",
-      image: `${base}images/projects/contactoo.svg`,
-      link: "https://www.linkedin.com/in/aman6387",
+        "Full-stack contact manager with REST APIs, responsive UI, and MySQL-backed CRUD workflows built in a team environment.",
+      features: [
+        "RESTful API for contact CRUD",
+        "Responsive React frontend",
+        "MySQL database integration",
+        "Team-based agile delivery",
+      ],
+      techStack: ["Java", "Spring Boot", "React", "MySQL", "REST", "HTML/CSS"],
+      tools: ["IntelliJ", "VS Code", "Postman", "Git", "MySQL Workbench"],
+      images: [`${base}images/projects/contactoo.svg`],
+      link: liveSite,
+      demo: liveSite,
+      github: "https://github.com/Aman6387",
     },
-  ],
-  techStack: [
-    "Unity",
-    "C#",
-    "Git",
-    "VS Code",
-    "Android",
-    "iOS",
-  ],
+  ] satisfies Project[],
+  techStack: ["Unity", "C#", "Git", "VS Code", "Android", "iOS"],
 } as const;

@@ -13,7 +13,9 @@
   max-width: var(--cMaxWidth);
   margin: 0 auto;
   height: 100%;
+  min-height: 100%;
   position: relative;
+  isolation: isolate;
 }
 
 .hero-canvas-layer {
@@ -23,12 +25,18 @@
   pointer-events: none;
 }
 
+.landing-intro,
+.landing-info {
+  opacity: 1;
+  z-index: 20;
+  transform: translate3d(0, 0, 1px);
+}
+
 .landing-intro {
   position: absolute;
-  z-index: 2;
   left: 0;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate3d(0, -50%, 1px);
   pointer-events: none;
 }
 
@@ -51,10 +59,9 @@
 
 .landing-info {
   position: absolute;
-  z-index: 2;
   right: 0;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate3d(0, -50%, 1px);
   text-align: right;
   pointer-events: none;
 }
@@ -81,42 +88,73 @@
   color: transparent;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
+  .landing-section {
+    height: 100svh;
+    min-height: 100svh;
+    padding-bottom: 0;
+  }
+
+  .landing-container {
+    display: grid;
+    grid-template-rows: auto minmax(220px, 1fr) auto;
+    align-content: stretch;
+    height: 100%;
+    min-height: 100%;
+  }
+
+  .landing-intro {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    max-width: none;
+    grid-row: 1;
+    padding-top: 4.75rem;
+    z-index: 20;
+  }
+
+  .hero-canvas-layer {
+    position: relative;
+    inset: auto;
+    grid-row: 2;
+    min-height: 220px;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .landing-info {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    transform: none;
+    max-width: none;
+    grid-row: 3;
+    text-align: right;
+    padding-bottom: 5.25rem;
+    z-index: 20;
+  }
+}
+
+@media (max-width: 900px) and (min-width: 769px) {
   .landing-intro {
     left: 0;
-    top: 14%;
-    transform: none;
-    max-width: 55%;
+    top: 5.5rem;
+    transform: translate3d(0, 0, 1px);
+    max-width: 62%;
   }
 
   .landing-info {
     right: 0;
     top: auto;
-    bottom: 14%;
-    transform: none;
-    max-width: 55%;
+    bottom: 5.5rem;
+    transform: translate3d(0, 0, 1px);
+    max-width: 62%;
   }
 }
 
 @media (max-width: 600px) {
-  .landing-section {
-    min-height: 100svh;
-    height: auto;
-    padding-bottom: 2rem;
-  }
-
-  .landing-intro {
-    top: 12%;
-    max-width: 100%;
-    padding-right: 30%;
-  }
-
-  .landing-info {
-    bottom: 10%;
-    max-width: 100%;
-    padding-left: 30%;
-  }
-
   .landing-intro h1 {
     font-size: clamp(2rem, 11vw, 2.8rem);
   }
