@@ -1,11 +1,6 @@
-import { Suspense, useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import {
-  ContactShadows,
-  Environment,
-  useAnimations,
-  useGLTF,
-} from "@react-three/drei";
+import { useAnimations, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import type { Group } from "three";
 import "./HeroScene.css";
@@ -38,12 +33,25 @@ function HoodieCharacter({ start }: HoodieCharacterProps) {
   const { actions, mixer } = useAnimations(animations, modelRef);
 
   useEffect(() => {
+    scene.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) {
+        const mesh = child as THREE.Mesh;
+        mesh.frustumCulled = true;
+        if (mesh.material) {
+          const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+          mats.forEach((m) => {
+            m.needsUpdate = false;
+          });
+        }
+      }
+    });
+  }, [scene]);
+
+  useEffect(() => {
     if (!start || started.current) return;
     started.current = true;
     phase.current = "walk";
-
-    const walk = actions[WALK_CLIP];
-    walk?.reset().setLoop(THREE.LoopRepeat, Infinity).fadeIn(0.3).play();
+    actions[WALK_CLIP]?.reset().setLoop(THREE.LoopRepeat, Infinity).fadeIn(0.3).play();
 
     const onFinished = (event: { action: THREE.AnimationAction }) => {
       if (event.action === actions[WAVE_CLIP]) {
@@ -64,25 +72,18 @@ function HoodieCharacter({ start }: HoodieCharacterProps) {
   useFrame((_, delta) => {
     const root = rootRef.current;
     const model = modelRef.current;
+    if (!model || !root) return;
 
-    if (model) {
-      const faceTarget =
-        phase.current === "walk" ? WALK_ROTATION : FACE_ROTATION;
-      model.rotation.y = THREE.MathUtils.lerp(
-        model.rotation.y,
-        faceTarget,
-        delta * 5
-      );
-    }
+    const faceTarget = phase.current === "walk" ? WALK_ROTATION : FACE_ROTATION;
+    model.rotation.y = THREE.MathUtils.lerp(model.rotation.y, faceTarget, delta * 5);
 
-    if (!root || phase.current !== "walk") return;
+    if (phase.current !== "walk") return;
 
     root.position.x = Math.max(0, root.position.x - WALK_SPEED * delta);
 
     if (root.position.x <= 0.02) {
       root.position.x = 0;
       phase.current = "wave";
-
       actions[WALK_CLIP]?.fadeOut(0.2);
       const wave = actions[WAVE_CLIP];
       wave?.reset().setLoop(THREE.LoopOnce, 1);
@@ -110,30 +111,56 @@ type HeroSceneProps = {
 };
 
 const HeroScene = ({ start = true }: HeroSceneProps) => {
-  const isMobile =
-    typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches;
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.05, rootMargin: "50px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const reducedMotion = useRef(
+    typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
 
   return (
-    <div className="hero-scene">
+    <div className="hero-scene" ref={wrapRef}>
       <Canvas
-        camera={{ position: [0, 0.5, isMobile ? 6 : 5.5], fov: isMobile ? 42 : 38 }}
-        dpr={isMobile ? 1 : [1, 2]}
-        gl={{ antialias: true, alpha: true }}
+        frameloop={inView ? "always" : "never"}
+        camera={{ position: [0, 0.5, isMobile ? 6.2 : 5.5], fov: isMobile ? 42 : 38 }}
+        dpr={isMobile ? 1 : Math.min(window.devicePixelRatio, 1.25)}
+        gl={{
+          antialias: !isMobile,
+          alpha: true,
+          powerPreference: "high-performance",
+          stencil: false,
+          depth: true,
+        }}
+        performance={{ min: 0.75 }}
       >
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 8, 5]} intensity={1.4} color="#ffffff" />
-        <pointLight position={[-4, 2, 3]} intensity={0.8} color="#c2a4ff" />
-        <pointLight position={[3, 1, 2]} intensity={0.4} color="#2ee8c0" />
+        <ambientLight intensity={0.65} />
+        <directionalLight position={[4, 8, 4]} intensity={1.1} />
+        <directionalLight position={[-3, 4, -2]} intensity={0.35} color="#c2a4ff" />
         <Suspense fallback={null}>
-          <Environment preset="city" />
-          <HoodieCharacter start={start} />
-          <ContactShadows
-            position={[0, GROUND_Y, 0]}
-            opacity={0.55}
-            scale={12}
-            blur={2.5}
-            far={5}
-          />
+          {!reducedMotion.current && <HoodieCharacter start={start} />}
         </Suspense>
       </Canvas>
       <div className="hero-scene-glow" aria-hidden="true" />

@@ -54,25 +54,23 @@
   width: 280px;
   height: 280px;
   border-radius: 50%;
-  filter: blur(60px);
   pointer-events: none;
   z-index: 0;
+  will-change: transform;
 }
 
 .landing-circle1 {
   top: 0;
   left: 0;
-  background-color: #fb8dff;
-  box-shadow: inset -50px 40px 50px rgba(84, 0, 255, 0.5);
-  animation: circleDrift 8s linear infinite;
+  background: radial-gradient(circle, rgba(251, 141, 255, 0.35), transparent 70%);
+  animation: circleDrift 12s linear infinite;
 }
 
 .landing-circle2 {
   bottom: 10%;
   right: 5%;
-  background-color: #c481ff;
-  opacity: 0.5;
-  animation: circleDrift 10s linear infinite reverse;
+  background: radial-gradient(circle, rgba(196, 129, 255, 0.25), transparent 70%);
+  animation: circleDrift 16s linear infinite reverse;
 }
 
 .nav-fade {

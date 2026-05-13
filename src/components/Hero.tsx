@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import gsap from "gsap";
 import { portfolio } from "../content/portfolio";
-import HeroScene from "./HeroScene";
 import "./Hero.css";
+
+const HeroScene = lazy(() => import("./HeroScene"));
 
 type HeroProps = {
   animStart?: boolean;
@@ -43,7 +44,9 @@ const Hero = ({ animStart = true }: HeroProps) => {
           </h2>
         </div>
         <div className="hero-canvas-layer">
-          <HeroScene start={animStart} />
+          <Suspense fallback={null}>
+            <HeroScene start={animStart} />
+          </Suspense>
         </div>
       </div>
     </section>
