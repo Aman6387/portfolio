@@ -2,6 +2,8 @@ const base = import.meta.env.BASE_URL;
 const liveSite = "https://aman6387.github.io/portfolio/";
 const platformerRelease =
   "https://github.com/Aman6387/portfolio/releases/tag/VersionTag(v1.0.1)";
+/** Bump when you replace public/resume.pdf so browsers fetch the new file */
+const resumeVersion = "20260514";
 
 export type Project = {
   title: string;
@@ -28,7 +30,7 @@ export const portfolio = {
   phone: "+91 63870 00490",
   linkedin: "https://www.linkedin.com/in/aman6387",
   github: "https://github.com/Aman6387",
-  resumeUrl: `${base}resume.pdf`,
+  resumeUrl: `${base}resume.pdf?v=${resumeVersion}`,
   about: [
     "Computer Science graduate with expertise in Unity game development, C#, and interactive experiences. I ship 2D and 3D games across Android, iOS, Windows, and Mac—with strong gameplay, animation, physics, and mobile performance tuning. I also completed a full-stack Java internship (Spring Boot, React, MySQL), so I'm comfortable owning features end-to-end beyond the engine.",
     "At Vihaa Infotech I design modes and UI, manage store submissions, and ship updates that improve retention. Outside of work: chess, hiking, and playing mobile games to stay close to what players feel day to day.",
