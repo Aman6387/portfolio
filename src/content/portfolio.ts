@@ -1,3 +1,5 @@
+const base = import.meta.env.BASE_URL;
+
 export const portfolio = {
   name: "Aman Pandey",
   initials: "AP",
@@ -9,7 +11,7 @@ export const portfolio = {
   phone: "+91 63870 00490",
   linkedin: "https://www.linkedin.com/in/aman6387",
   github: "https://github.com/Aman6387",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: `${base}resume.pdf`,
   about: [
     "Computer Science graduate with expertise in Unity game development, C#, and interactive experiences. I ship 2D and 3D games across Android, iOS, Windows, and Mac—with strong gameplay, animation, physics, and mobile performance tuning. I also completed a full-stack Java internship (Spring Boot, React, MySQL), so I'm comfortable owning features end-to-end beyond the engine.",
     "At Vihaa Infotech I design modes and UI, manage store submissions, and ship updates that improve retention. Outside of work: chess, hiking, and playing mobile games to stay close to what players feel day to day.",
@@ -62,7 +64,7 @@ export const portfolio = {
       category: "Android · Unity 2D",
       description:
         "Unity 2D, C#, Physics2D, Tilemap, Animator, touch controls, prefabs, sprite atlasing, mobile FPS tuning.",
-      image: "/images/projects/platformer.svg",
+      image: `${base}images/projects/platformer.svg`,
       link: "https://www.linkedin.com/in/aman6387",
     },
     {
@@ -70,7 +72,7 @@ export const portfolio = {
       category: "Full-stack · Java · React",
       description:
         "Java, Spring Boot, React, MySQL, REST APIs, responsive UI, CRUD workflows, team delivery.",
-      image: "/images/projects/contactoo.svg",
+      image: `${base}images/projects/contactoo.svg`,
       link: "https://www.linkedin.com/in/aman6387",
     },
   ],

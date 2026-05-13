@@ -5,7 +5,7 @@ import * as THREE from "three";
 import type { Group } from "three";
 import "./HeroScene.css";
 
-const MODEL_PATH = "/models/hoodie-character.glb";
+const MODEL_PATH = `${import.meta.env.BASE_URL}models/hoodie-character.glb`;
 const WALK_CLIP = "CharacterArmature|Walk";
 const WAVE_CLIP = "CharacterArmature|Wave";
 const IDLE_CLIP = "CharacterArmature|Idle";
