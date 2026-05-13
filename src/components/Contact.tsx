@@ -1,5 +1,6 @@
 import { MdArrowOutward, MdCopyright } from "react-icons/md";
-import "./styles/Contact.css";
+import { portfolio } from "../content/portfolio";
+import "./Contact.css";
 
 const Contact = () => {
   return (
@@ -10,38 +11,40 @@ const Contact = () => {
           <div className="contact-box">
             <h4>Email</h4>
             <p>
-              <a
-                href="mailto:aman.pandey12062002@gmail.com"
-                data-cursor="disable"
-              >
-                aman.pandey12062002@gmail.com
-              </a>
+              <a href={`mailto:${portfolio.email}`}>{portfolio.email}</a>
             </p>
             <h4>Phone</h4>
             <p>
-              <a href="tel:+916387000490" data-cursor="disable">
-                +91 63870 00490
+              <a href={`tel:${portfolio.phone.replace(/\s/g, "")}`}>
+                {portfolio.phone}
               </a>
             </p>
           </div>
           <div className="contact-box">
             <h4>Social</h4>
             <a
-              href="https://www.linkedin.com/in/aman6387"
+              href={portfolio.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              data-cursor="disable"
               className="contact-social"
             >
               LinkedIn <MdArrowOutward />
             </a>
+            <a
+              href={portfolio.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-social"
+            >
+              GitHub <MdArrowOutward />
+            </a>
           </div>
           <div className="contact-box">
             <h2>
-              Designed and Developed <br /> by <span>Aman Pandey</span>
+              Designed and Developed <br /> by <span>{portfolio.name}</span>
             </h2>
             <h5>
-              <MdCopyright /> 2026
+              <MdCopyright /> {new Date().getFullYear()}
             </h5>
           </div>
         </div>

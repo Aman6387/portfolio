@@ -1,0 +1,58 @@
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+}
+
+.splash-inner {
+  text-align: center;
+}
+
+.splash-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--secondary);
+}
+
+.splash-title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 1rem 0 1.5rem;
+}
+
+.splash-bar {
+  width: 160px;
+  height: 3px;
+  background: var(--bg-elevated);
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.splash-bar-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  animation: splashLoad 1.2s ease forwards;
+}
+
+@keyframes splashLoad {
+  to {
+    width: 100%;
+  }
+}
+
+.page-loading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.page-ready {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}

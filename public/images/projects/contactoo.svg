@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" fill="#111827"/>
+  <rect x="60" y="80" width="320" height="290" rx="8" fill="#1a2236" stroke="#2ee8c0" stroke-width="2"/>
+  <rect x="420" y="80" width="320" height="140" rx="8" fill="#1a2236" stroke="#ffb020" stroke-width="2"/>
+  <rect x="420" y="240" width="320" height="130" rx="8" fill="#1a2236" stroke="#2ee8c0" stroke-width="2"/>
+  <text x="80" y="130" fill="#e8edf5" font-family="monospace" font-size="22">Contactoo API</text>
+  <text x="80" y="170" fill="#8b9bb8" font-family="monospace" font-size="16">Spring Boot + React</text>
+  <text x="40" y="50" fill="#ffb020" font-family="monospace" font-size="28">Full-Stack App</text>
+</svg>

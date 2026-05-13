@@ -1,0 +1,49 @@
+.skills-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.skill-card {
+  padding: 1.75rem;
+}
+
+.skill-card h3 {
+  font-size: 1.35rem;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.skill-sub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--secondary);
+  margin-bottom: 1rem;
+}
+
+.skill-desc {
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  background: var(--bg-elevated);
+}
+
+@media (min-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

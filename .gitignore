@@ -26,6 +26,3 @@ dist-ssr
 
 backup/
 .env
-
-# Source 3D model (encrypted copy character.enc is committed instead)
-public/models/character.glb

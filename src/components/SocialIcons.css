@@ -1,0 +1,123 @@
+.icons-section {
+  position: fixed;
+  z-index: 99;
+  left: clamp(12px, 2vw, 28px);
+  bottom: clamp(16px, 3vh, 36px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.icons-section--hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+.social-icons {
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+  pointer-events: auto;
+}
+
+.social-icons span {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icons a {
+  display: flex;
+  font-size: 22px;
+  color: var(--text);
+  transition: color 0.25s, transform 0.25s;
+}
+
+.social-icons a:hover {
+  color: var(--accentColor);
+  transform: scale(1.1);
+}
+
+.resume-button {
+  position: fixed;
+  right: clamp(12px, 2vw, 28px);
+  bottom: clamp(16px, 3vh, 36px);
+  z-index: 99;
+  display: flex;
+  gap: 6px;
+  letter-spacing: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #5e5e5e;
+  transition: color 0.4s, opacity 0.35s;
+  pointer-events: auto;
+  align-items: center;
+}
+
+.icons-section--hidden .resume-button {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.resume-button:hover {
+  color: #fff;
+}
+
+.resume-button span {
+  color: #fff;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 899px) {
+  .social-icons {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    left: 50%;
+    bottom: 1rem;
+    transform: translateX(-50%);
+    gap: 1.25rem;
+    background: rgba(11, 8, 12, 0.85);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+
+  .resume-button {
+    position: fixed;
+    right: 0.75rem;
+    bottom: 4.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+  }
+
+  .icons-section {
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@media (min-width: 900px) {
+  .social-icons {
+    display: flex;
+  }
+
+  .social-icons a {
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 768px) {
+  .resume-button {
+    font-size: 20px;
+  }
+
+  .resume-button span {
+    font-size: 23px;
+  }
+}

@@ -1,77 +1,66 @@
-import { FaLinkedinIn } from "react-icons/fa6";
+import { useEffect, useState } from "react";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa6";
 import { MdOutlineEmail } from "react-icons/md";
-import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
-import { useEffect } from "react";
-import HoverLinks from "./HoverLinks";
+import { portfolio } from "../content/portfolio";
+import "./SocialIcons.css";
 
 const SocialIcons = () => {
+  const [nearContact, setNearContact] = useState(false);
+
   useEffect(() => {
-    const social = document.getElementById("social") as HTMLElement;
+    const contact = document.getElementById("contact");
+    if (!contact) return;
 
-    social.querySelectorAll("span").forEach((item) => {
-      const elem = item as HTMLElement;
-      const link = elem.querySelector("a") as HTMLElement;
+    const observer = new IntersectionObserver(
+      ([entry]) => setNearContact(entry.isIntersecting),
+      { threshold: 0.15, rootMargin: "0px 0px -80px 0px" }
+    );
 
-      const rect = elem.getBoundingClientRect();
-      let mouseX = rect.width / 2;
-      let mouseY = rect.height / 2;
-      let currentX = 0;
-      let currentY = 0;
-
-      const updatePosition = () => {
-        currentX += (mouseX - currentX) * 0.1;
-        currentY += (mouseY - currentY) * 0.1;
-
-        link.style.setProperty("--siLeft", `${currentX}px`);
-        link.style.setProperty("--siTop", `${currentY}px`);
-
-        requestAnimationFrame(updatePosition);
-      };
-
-      const onMouseMove = (e: MouseEvent) => {
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        if (x < 40 && x > 10 && y < 40 && y > 5) {
-          mouseX = x;
-          mouseY = y;
-        } else {
-          mouseX = rect.width / 2;
-          mouseY = rect.height / 2;
-        }
-      };
-
-      document.addEventListener("mousemove", onMouseMove);
-
-      updatePosition();
-
-      return () => {
-        elem.removeEventListener("mousemove", onMouseMove);
-      };
-    });
+    observer.observe(contact);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="icons-section">
-      <div className="social-icons" data-cursor="icons" id="social">
+    <div
+      className={`icons-section${nearContact ? " icons-section--hidden" : ""}`}
+      aria-hidden={nearContact}
+    >
+      <div className="social-icons" id="social">
         <span>
           <a
-            href="https://www.linkedin.com/in/aman6387"
+            href={portfolio.github}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="GitHub"
+          >
+            <FaGithub />
+          </a>
+        </span>
+        <span>
+          <a
+            href={portfolio.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
           >
             <FaLinkedinIn />
           </a>
         </span>
         <span>
-          <a href="mailto:aman.pandey12062002@gmail.com">
+          <a href={`mailto:${portfolio.email}`} aria-label="Email">
             <MdOutlineEmail />
           </a>
         </span>
       </div>
-      <a className="resume-button" href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-        <HoverLinks text="RESUME" />
+      <a
+        className="resume-button"
+        href={portfolio.resumeUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        download="Aman_Pandey_Resume.pdf"
+      >
+        RESUME
         <span>
           <TbNotes />
         </span>

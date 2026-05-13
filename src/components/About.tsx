@@ -1,25 +1,40 @@
-import "./styles/About.css";
+import { portfolio } from "../content/portfolio";
+import { useReveal } from "../hooks/useReveal";
+import "./About.css";
 
 const About = () => {
+  const ref = useReveal<HTMLDivElement>();
+
   return (
-    <div className="about-section" id="about">
-      <div className="about-me">
-        <h3 className="title">About Me</h3>
-        <p className="para">
-          Computer Science graduate with expertise in Unity game development,
-          C#, and interactive experiences. I ship 2D and 3D games across Android,
-          iOS, Windows, and Mac—with strong gameplay, animation, physics, and
-          mobile performance tuning. I also completed a full-stack Java internship
-          (Spring Boot, React, MySQL), so I&apos;m comfortable owning features
-          end-to-end beyond the engine.
-        </p>
-        <p className="para">
-          At Vihaa Infotech I design modes and UI, manage store submissions, and
-          ship updates that improve retention. Outside of work: chess, hiking, and
-          playing mobile games to stay close to what players feel day to day.
-        </p>
+    <section className="section about" id="about">
+      <div className="section-inner reveal" ref={ref}>
+        <p className="section-label">About</p>
+        <h2 className="section-title">
+          Who <span>I am</span>
+        </h2>
+        <div className="about-grid hud-card">
+          <div className="about-text">
+            {portfolio.about.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+            ))}
+          </div>
+          <div className="about-stats">
+            <div className="about-stat">
+              <span>Role</span>
+              <strong>{portfolio.role}</strong>
+            </div>
+            <div className="about-stat">
+              <span>Location</span>
+              <strong>{portfolio.location}</strong>
+            </div>
+            <div className="about-stat">
+              <span>Experience</span>
+              <strong>{portfolio.yearsFocus}</strong>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

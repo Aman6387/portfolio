@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <rect width="800" height="450" fill="#111827"/>
+  <rect x="40" y="280" width="720" height="24" rx="4" fill="#1a2236"/>
+  <rect x="120" y="200" width="48" height="80" rx="6" fill="#2ee8c0"/>
+  <rect x="200" y="160" width="48" height="120" rx="6" fill="#ffb020"/>
+  <rect x="280" y="220" width="48" height="60" rx="6" fill="#2ee8c0"/>
+  <circle cx="600" cy="120" r="40" fill="#ffb020" opacity="0.8"/>
+  <text x="40" y="60" fill="#2ee8c0" font-family="monospace" font-size="28">2D Platformer</text>
+</svg>
