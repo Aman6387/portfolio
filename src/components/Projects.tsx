@@ -15,7 +15,15 @@ function projectLiveUrl(project: Project) {
   return project.demo ?? project.github ?? project.link;
 }
 
-function FeaturedProject({ project, index }: { project: Project; index: number }) {
+function FeaturedProject({
+  project,
+  index,
+  showBadge = false,
+}: {
+  project: Project;
+  index: number;
+  showBadge?: boolean;
+}) {
   const [activeShot, setActiveShot] = useState(0);
 
   return (
@@ -24,7 +32,7 @@ function FeaturedProject({ project, index }: { project: Project; index: number }
         <div className="work-featured-info">
           <div className="work-featured-head">
             <span className="work-num">0{index + 1}</span>
-            <span className="work-badge">Featured Project</span>
+            {showBadge && <span className="work-badge">Featured Project</span>}
           </div>
           <h3>{project.title}</h3>
           <p className="work-cat">{project.category}</p>
@@ -46,7 +54,7 @@ function FeaturedProject({ project, index }: { project: Project; index: number }
             View Project <MdArrowOutward />
           </a>
         </div>
-        <div className="work-gallery">
+        <div className={`work-gallery${project.images.length > 2 ? " work-gallery--many" : ""}`}>
           <div className="work-gallery-stack">
             {project.images.map((src, i) => (
               <div
@@ -161,8 +169,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 const Projects = () => {
   const ref = useReveal<HTMLElement>();
-  const featured = portfolio.projects.find((p) => p.featured);
-  const others = portfolio.projects.filter((p) => !p.featured);
+  const showcaseProjects = portfolio.projects.filter((p) => p.featured || p.showcase);
+  const cardProjects = portfolio.projects.filter((p) => !p.featured && !p.showcase);
 
   return (
     <section className="work-section section-container reveal" id="work" ref={ref}>
@@ -170,15 +178,17 @@ const Projects = () => {
         <h2>
           My <span>Work</span>
         </h2>
-        {featured && (
+        {showcaseProjects.map((project) => (
           <FeaturedProject
-            project={featured}
-            index={portfolio.projects.indexOf(featured)}
+            key={project.title}
+            project={project}
+            index={portfolio.projects.indexOf(project)}
+            showBadge={Boolean(project.featured)}
           />
-        )}
-        {others.length > 0 && (
+        ))}
+        {cardProjects.length > 0 && (
           <div className="work-grid">
-            {others.map((project) => (
+            {cardProjects.map((project) => (
               <ProjectCard
                 key={project.title}
                 project={project}

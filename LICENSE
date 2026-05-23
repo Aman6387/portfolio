@@ -1,21 +1,41 @@
-MIT License
+Copyright (c) 2026 Aman Pandey. All Rights Reserved.
 
-Copyright (c) 2026 Aman Pandey
+This repository, including but not limited to source code, website design,
+graphics, screenshots, game builds (APK/IPA/executables), documentation,
+and release assets, is the exclusive property of Aman Pandey unless
+otherwise stated in THIRD_PARTY_NOTICES.md.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+NO PERMISSION IS GRANTED to any person or entity to:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+  - Copy, fork, mirror, or republish this repository or any part of it
+    on GitHub, GitLab, or any other platform, except as allowed below
+  - Redistribute, sublicense, or sell the source code, builds, or assets
+  - Use the portfolio, games, art, or branding for commercial purposes
+  - Claim authorship or present this work as your own
+  - Upload modified or unmodified versions to app stores or marketplaces
+  - Re-release APKs, binaries, or assets under a different name or account
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+PERMITTED USE (non-exclusive, revocable):
+
+  - Viewing the public repository and live site for reference only
+  - Linking to the official repository or portfolio URL with attribution
+  - Reporting issues or contacting the owner for licensing inquiries
+
+REQUESTS FOR PERMISSION:
+
+  Written permission is required before any reuse, republication, or
+  derivative use. Contact: aman.pandey12062002@gmail.com
+
+THIRD-PARTY COMPONENTS:
+
+  Open-source dependencies and separately licensed assets (e.g. CC0 models)
+  remain under their respective licenses. See THIRD_PARTY_NOTICES.md.
+
+DISCLAIMER:
+
+  This software and materials are provided "as is" without warranty of any
+  kind. The owner is not liable for any damages arising from unauthorized
+  use or redistribution.
+
+Violation of these terms may result in takedown requests and other remedies
+available under applicable copyright law.

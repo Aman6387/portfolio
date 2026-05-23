@@ -81,6 +81,21 @@ a.contact-social {
   margin-top: 1rem;
 }
 
+.contact-license {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.contact-license a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.contact-license a:hover {
+  color: var(--accentColor);
+}
+
 @media (max-width: 900px) {
   .contact-flex {
     flex-direction: column;

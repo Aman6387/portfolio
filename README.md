@@ -31,6 +31,15 @@ Edit [`src/content/portfolio.ts`](src/content/portfolio.ts) to update bio, proje
 
 The hero uses **Hoodie Character** by [Quaternius](https://poly.pizza/m/gKLBoRsyKe) (CC0), stored at `public/models/hoodie-character.glb`. On load it walks in, waves, then idles.
 
-## License
+## License & copyright
 
-MIT — see [LICENSE](LICENSE).
+**All Rights Reserved** — this project is **not** open source for reuse.
+
+| Document | Purpose |
+|----------|---------|
+| [LICENSE](LICENSE) | Legal terms — no redistribution without permission |
+| [COPYRIGHT.md](COPYRIGHT.md) | What is protected; Git & release rules |
+| [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) | CC0 model, fonts, npm deps |
+
+- **No forking/republishing** of this repo, code, screenshots, or release APKs without written permission from Aman Pandey (`aman.pandey12062002@gmail.com`).
+- **GitHub Releases** should use the [release template](.github/release_template.md) so copyright terms appear on each release page.

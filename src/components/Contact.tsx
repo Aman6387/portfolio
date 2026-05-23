@@ -43,9 +43,18 @@ const Contact = () => {
             <h2>
               Designed and Developed <br /> by <span>{portfolio.name}</span>
             </h2>
-            <h5>
-              <MdCopyright /> {new Date().getFullYear()}
+            <h5 className="contact-rights">
+              <MdCopyright /> {new Date().getFullYear()} · All rights reserved
             </h5>
+            <p className="contact-license">
+              <a
+                href="https://github.com/Aman6387/portfolio/blob/main/LICENSE"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                License &amp; usage terms
+              </a>
+            </p>
           </div>
         </div>
       </div>

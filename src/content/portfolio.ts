@@ -2,6 +2,8 @@ const base = import.meta.env.BASE_URL;
 const liveSite = "https://aman6387.github.io/portfolio/";
 const platformerRelease =
   "https://github.com/Aman6387/portfolio/releases/tag/VersionTag(v1.0.1)";
+const wordSearchRelease =
+  "https://github.com/Aman6387/portfolio/releases/tag/WS_V1.0.0";
 /** Bump when you replace public/resume.pdf so browsers fetch the new file */
 const resumeVersion = "20260514";
 
@@ -10,6 +12,7 @@ export type Project = {
   category: string;
   description: string;
   featured?: boolean;
+  showcase?: boolean;
   features: string[];
   techStack: string[];
   tools: string[];
@@ -109,6 +112,42 @@ export const portfolio = {
       ],
       link: platformerRelease,
       demo: platformerRelease,
+      github: "https://github.com/Aman6387/portfolio",
+    },
+    {
+      title: "Word Search Game",
+      category: "Android · Unity 2D",
+      showcase: true,
+      description:
+        "A polished mobile word-search puzzle with a magical forest theme. Players hunt words on an interactive letter grid across multiple modes, with hints, coins, and full audio/settings control.",
+      features: [
+        "Classic, Timed Challenge, Endless Expert, and Daily Puzzle modes",
+        "Interactive letter grid with swipe/drag word selection",
+        "Live word list, timer, and progress tracking",
+        "Hint power-ups (Hint + Reveal) and coin economy",
+        "Settings: difficulty cycling, adaptive mode, music & VFX toggles",
+        "Mobile-optimized UI with themed menus and visual polish",
+      ],
+      techStack: [
+        "Unity 2D",
+        "C#",
+        "uGUI",
+        "ScriptableObjects",
+        "PlayerPrefs",
+        "Grid Generation",
+        "Word Placement",
+        "Android",
+        "Mobile UI",
+      ],
+      tools: ["Unity", "Visual Studio", "Git", "Android Build"],
+      images: [
+        `${base}images/projects/WordSearch_1.png`,
+        `${base}images/projects/WordSearch_2.png`,
+        `${base}images/projects/WordSearch_3.png`,
+        `${base}images/projects/WordSearch_4.png`,
+      ],
+      link: wordSearchRelease,
+      demo: wordSearchRelease,
       github: "https://github.com/Aman6387/portfolio",
     },
     {

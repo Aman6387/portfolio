@@ -181,6 +181,15 @@
   display: block;
 }
 
+.work-gallery--many .work-gallery-thumbs {
+  width: 56px;
+  gap: 0.35rem;
+}
+
+.work-gallery--many .work-gallery-thumbs button {
+  border-radius: 4px;
+}
+
 .work-detail-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
