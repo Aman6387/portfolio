@@ -54,16 +54,16 @@ function FeaturedProject({
             View Project <MdArrowOutward />
           </a>
         </div>
-        <div className={`work-gallery${project.images.length > 2 ? " work-gallery--many" : ""}`}>
-          <div className="work-gallery-stack">
-            {project.images.map((src, i) => (
-              <div
-                key={src}
-                className={`work-gallery-shot${i === activeShot ? " active" : ""}`}
-              >
-                <img src={src} alt={`${project.title} screenshot ${i + 1}`} />
-              </div>
-            ))}
+        <div
+          className={`work-gallery${project.images.length > 2 ? " work-gallery--many" : ""}${(project.galleryAspect ?? "landscape") === "landscape" ? " work-gallery--landscape" : " work-gallery--portrait"}`}
+        >
+          <div
+            className={`work-gallery-viewport work-gallery-viewport--${project.galleryAspect ?? "landscape"}`}
+          >
+            <img
+              src={project.images[activeShot] ?? project.images[0]}
+              alt={`${project.title} screenshot ${activeShot + 1}`}
+            />
           </div>
           {project.images.length > 1 && (
             <div className="work-gallery-thumbs">
@@ -168,14 +168,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 const Projects = () => {
-  const ref = useReveal<HTMLElement>();
+  const ref = useReveal<HTMLHeadingElement>();
   const showcaseProjects = portfolio.projects.filter((p) => p.featured || p.showcase);
   const cardProjects = portfolio.projects.filter((p) => !p.featured && !p.showcase);
 
   return (
-    <section className="work-section section-container reveal" id="work" ref={ref}>
+    <section className="work-section section-container" id="work">
       <div className="work-container">
-        <h2>
+        <h2 className="reveal" ref={ref}>
           My <span>Work</span>
         </h2>
         {showcaseProjects.map((project) => (

@@ -172,6 +172,14 @@ button {
   transform: translateY(0);
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .divider-angle {
   height: 48px;
   background: linear-gradient(

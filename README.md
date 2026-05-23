@@ -27,6 +27,18 @@ npm run preview
 
 Edit [`src/content/portfolio.ts`](src/content/portfolio.ts) to update bio, projects, career, and links.
 
+## Resume
+
+- **Source:** [`public/resume.html`](public/resume.html) — edit projects, copy, and image paths here.
+- **PDF:** [`public/resume.pdf`](public/resume.pdf) — regenerate after HTML changes (Chrome/Edge):
+
+```bash
+# Windows (Chrome or Edge)
+& "${env:ProgramFiles}\Google\Chrome\Application\chrome.exe" --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="public/resume.pdf" "file:///D:/Git_PortFolio/portfolio/public/resume.html"
+```
+
+Bump `resumeVersion` in `portfolio.ts` when you replace the PDF so browsers fetch the new file.
+
 ## 3D hero
 
 The hero uses **Hoodie Character** by [Quaternius](https://poly.pizza/m/gKLBoRsyKe) (CC0), stored at `public/models/hoodie-character.glb`. On load it walks in, waves, then idles.

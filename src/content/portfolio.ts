@@ -5,7 +5,7 @@ const platformerRelease =
 const wordSearchRelease =
   "https://github.com/Aman6387/portfolio/releases/tag/WS_V1.0.0";
 /** Bump when you replace public/resume.pdf so browsers fetch the new file */
-const resumeVersion = "20260514";
+const resumeVersion = "20260523d";
 
 export type Project = {
   title: string;
@@ -20,6 +20,8 @@ export type Project = {
   link: string;
   github?: string;
   demo?: string;
+  /** Gallery frame shape for showcase screenshots (default landscape) */
+  galleryAspect?: "portrait" | "landscape";
 };
 
 export const portfolio = {
@@ -113,6 +115,7 @@ export const portfolio = {
       link: platformerRelease,
       demo: platformerRelease,
       github: "https://github.com/Aman6387/portfolio",
+      galleryAspect: "landscape",
     },
     {
       title: "Word Search Game",
@@ -149,6 +152,7 @@ export const portfolio = {
       link: wordSearchRelease,
       demo: wordSearchRelease,
       github: "https://github.com/Aman6387/portfolio",
+      galleryAspect: "portrait",
     },
     {
       title: "Contactoo — Smart Contact Manager",
