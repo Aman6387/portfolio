@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { portfolio, type Project } from "../content/portfolio";
 import { useReveal } from "../hooks/useReveal";
 import {
@@ -9,10 +9,89 @@ import {
   MdBuild,
 } from "react-icons/md";
 import { FaGithub } from "react-icons/fa6";
+import {
+  PROJECT_SHOW_VIDEO_EVENT,
+  projectSlug,
+  projectVideoHash,
+} from "../utils/projectDeepLink";
 import "./Projects.css";
 
 function projectLiveUrl(project: Project) {
   return project.demo ?? project.github ?? project.link;
+}
+
+type GalleryItem =
+  | { type: "image"; src: string }
+  | { type: "video"; src: string; poster?: string };
+
+function getGalleryItems(project: Project): GalleryItem[] {
+  const images: GalleryItem[] = project.images.map((src) => ({
+    type: "image" as const,
+    src,
+  }));
+  if (!project.video) return images;
+  return [
+    {
+      type: "video",
+      src: project.video,
+      poster: project.images[0],
+    },
+    ...images,
+  ];
+}
+
+function GalleryVideo({
+  id,
+  src,
+  poster,
+  title,
+}: {
+  id?: string;
+  src: string;
+  poster?: string;
+  title: string;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [loadError, setLoadError] = useState(false);
+
+  useEffect(() => {
+    setLoadError(false);
+    const el = ref.current;
+    if (!el) return;
+    el.load();
+    const play = el.play();
+    if (play !== undefined) {
+      play.catch(() => {
+        /* autoplay blocked until user interacts — controls still work */
+      });
+    }
+  }, [src]);
+
+  if (loadError) {
+    return (
+      <p className="work-gallery-video-error" role="status">
+        Video could not be loaded. Check that the file exists at{" "}
+        <code>{src}</code>
+      </p>
+    );
+  }
+
+  return (
+    <video
+      id={id}
+      ref={ref}
+      key={src}
+      src={src}
+      poster={poster}
+      controls
+      playsInline
+      muted
+      loop
+      preload="auto"
+      onError={() => setLoadError(true)}
+      aria-label={`${title} gameplay video`}
+    />
+  );
 }
 
 function FeaturedProject({
@@ -24,10 +103,26 @@ function FeaturedProject({
   index: number;
   showBadge?: boolean;
 }) {
+  const galleryItems = getGalleryItems(project);
   const [activeShot, setActiveShot] = useState(0);
+  const activeItem = galleryItems[activeShot] ?? galleryItems[0];
+  const slug = projectSlug(project.title);
+  const videoId = projectVideoHash(slug);
+
+  useEffect(() => {
+    const onShowVideo = (event: Event) => {
+      const { slug: targetSlug } = (event as CustomEvent<{ slug: string }>).detail;
+      if (targetSlug === slug && project.video) {
+        setActiveShot(0);
+      }
+    };
+    window.addEventListener(PROJECT_SHOW_VIDEO_EVENT, onShowVideo);
+    return () =>
+      window.removeEventListener(PROJECT_SHOW_VIDEO_EVENT, onShowVideo);
+  }, [slug, project.video]);
 
   return (
-    <article className="work-featured">
+    <article className="work-featured" id={slug}>
       <div className="work-featured-top">
         <div className="work-featured-info">
           <div className="work-featured-head">
@@ -60,22 +155,38 @@ function FeaturedProject({
           <div
             className={`work-gallery-viewport work-gallery-viewport--${project.galleryAspect ?? "landscape"}`}
           >
-            <img
-              src={project.images[activeShot] ?? project.images[0]}
-              alt={`${project.title} screenshot ${activeShot + 1}`}
-            />
+            {activeItem?.type === "video" ? (
+              <GalleryVideo
+                id={videoId}
+                src={activeItem.src}
+                poster={activeItem.poster}
+                title={project.title}
+              />
+            ) : (
+              <img
+                src={activeItem?.src ?? project.images[0]}
+                alt={`${project.title} screenshot ${activeShot + 1}`}
+              />
+            )}
           </div>
-          {project.images.length > 1 && (
+          {galleryItems.length > 1 && (
             <div className="work-gallery-thumbs">
-              {project.images.map((src, i) => (
+              {galleryItems.map((item, i) => (
                 <button
-                  key={src}
+                  key={item.src}
                   type="button"
-                  className={i === activeShot ? "active" : ""}
+                  className={`${i === activeShot ? "active" : ""}${item.type === "video" ? " is-video" : ""}`}
                   onClick={() => setActiveShot(i)}
-                  aria-label={`Screenshot ${i + 1}`}
+                  aria-label={item.type === "video" ? "Gameplay video" : `Screenshot ${i + 1}`}
                 >
-                  <img src={src} alt="" />
+                  {item.type === "video" ? (
+                    <>
+                      <img src={item.poster ?? project.images[0]} alt="" />
+                      <span className="work-thumb-play" aria-hidden="true" />
+                    </>
+                  ) : (
+                    <img src={item.src} alt="" />
+                  )}
                 </button>
               ))}
             </div>

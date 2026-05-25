@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useAnimations, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import type { Group, PerspectiveCamera } from "three";
+import { notifyHeroModelIdle } from "../../utils/projectDeepLink";
 import { getHeroSceneLayout, type HeroSceneLayout } from "./heroSceneLayout";
 import "./HeroScene.css";
 
@@ -78,6 +79,7 @@ function HoodieCharacter({ start, layout }: HoodieCharacterProps) {
           .setLoop(THREE.LoopRepeat, Infinity)
           .fadeIn(0.35)
           .play();
+        notifyHeroModelIdle();
       }
     };
 
@@ -172,6 +174,13 @@ const HeroScene = ({ start = true }: HeroSceneProps) => {
     typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
+
+  useEffect(() => {
+    if (!start) return;
+    if (reducedMotion.current) {
+      notifyHeroModelIdle();
+    }
+  }, [start]);
 
   return (
     <div className="hero-scene" ref={wrapRef}>

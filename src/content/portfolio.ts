@@ -1,11 +1,15 @@
 const base = import.meta.env.BASE_URL;
 const liveSite = "https://aman6387.github.io/portfolio/";
+/** Deep link: scrolls to Bouncy Ball gameplay video on the live portfolio */
+export const bouncyBallVideoUrl = `${liveSite}#bouncy-ball-video`;
 const platformerRelease =
   "https://github.com/Aman6387/portfolio/releases/tag/VersionTag(v1.0.1)";
 const wordSearchRelease =
   "https://github.com/Aman6387/portfolio/releases/tag/WS_V1.0.0";
+const bouncyBallRelease =
+  "https://github.com/Aman6387/portfolio/releases/tag/BB_V1.0.0";
 /** Bump when you replace public/resume.pdf so browsers fetch the new file */
-const resumeVersion = "20260523d";
+const resumeVersion = "20260528";
 
 export type Project = {
   title: string;
@@ -17,6 +21,8 @@ export type Project = {
   techStack: string[];
   tools: string[];
   images: string[];
+  /** Optional gameplay video (place file under public/videos/) */
+  video?: string;
   link: string;
   github?: string;
   demo?: string;
@@ -116,6 +122,39 @@ export const portfolio = {
       demo: platformerRelease,
       github: "https://github.com/Aman6387/portfolio",
       galleryAspect: "landscape",
+    },
+    {
+      title: "Bouncy Ball",
+      category: "Android · Unity 2D · Casual Arcade",
+      showcase: true,
+      description:
+        "A fast-paced casual arcade hypercasual game built in Unity. Guide a physics-driven ball across dynamic platforms, collect coins and gems, use spring boosts, and chase high scores in an addictive vertical climb with polished mobile UI and particle feedback.",
+      features: [
+        "Smooth physics-based ball movement and collision handling",
+        "Dynamic platform layout with springs, coins, and gem collectibles",
+        "Responsive touch controls tuned for one-thumb mobile play",
+        "Score progression, game-over flow, and instant restart loop",
+        "Particle effects, clean HUD, and mobile performance optimization",
+        "Endless arcade gameplay with modern casual visual polish",
+      ],
+      techStack: [
+        "Unity 2D",
+        "C#",
+        "Physics2D",
+        "Rigidbody2D",
+        "Particle System",
+        "UI/UX",
+        "Touch Input",
+        "Mobile Optimization",
+        "Game State Management",
+      ],
+      tools: ["Unity", "Visual Studio", "Git", "Android Build"],
+      images: [`${base}images/projects/BouncyBall_1.png`],
+      video: `${base}images/projects/BouncyBall.mp4`,
+      link: bouncyBallRelease,
+      demo: bouncyBallRelease,
+      github: "https://github.com/Aman6387/portfolio",
+      galleryAspect: "portrait",
     },
     {
       title: "Word Search Game",
