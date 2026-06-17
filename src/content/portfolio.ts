@@ -9,7 +9,7 @@ const wordSearchRelease =
 const bouncyBallRelease =
   "https://github.com/Aman6387/portfolio/releases/tag/BB_V1.0.0";
 /** Bump when you replace public/resume.pdf so browsers fetch the new file */
-const resumeVersion = "20260528";
+const resumeVersion = "20260609";
 
 export type Project = {
   title: string;
@@ -44,7 +44,7 @@ export const portfolio = {
   resumeUrl: `${base}resume.pdf?v=${resumeVersion}`,
   about: [
     "Computer Science graduate with expertise in Unity game development, C#, and interactive experiences. I ship 2D and 3D games across Android, iOS, Windows, and Mac—with strong gameplay, animation, physics, and mobile performance tuning. I also completed a full-stack Java internship (Spring Boot, React, MySQL), so I'm comfortable owning features end-to-end beyond the engine.",
-    "At Vihaa Infotech I design modes and UI, manage store submissions, and ship updates that improve retention. Outside of work: chess, hiking, and playing mobile games to stay close to what players feel day to day.",
+    "At Vihaa Infotech I designed modes and UI, managed store submissions, and shipped updates that improved retention. Outside of work: chess, hiking, and playing mobile games to stay close to what players feel day to day.",
   ],
   skills: [
     {
@@ -76,14 +76,14 @@ export const portfolio = {
     {
       role: "Unity Game Developer",
       company: "Vihaa Infotech · Ahmedabad, India",
-      period: "Present",
+      period: "May 2023 — May 2026",
       description:
-        "Develop and implement new game modes to boost engagement. Design and refine UI for clear, polished interaction. Manage cross-platform submissions for Android, iOS, Windows, and Mac with guideline compliance. Coordinate updates and patches that improve performance, fix issues, and lift retention.",
+        "Developed and implemented new game modes to boost engagement. Designed and refined UI for clear, polished interaction. Managed cross-platform submissions for Android, iOS, Windows, and Mac with guideline compliance. Coordinated updates and patches that improved performance, fixed issues, and lifted retention.",
     },
     {
       role: "Full-Stack Java Developer — Intern",
       company: "Code Planet Technologies · Contactoo",
-      period: "12 months",
+      period: "1 year",
       description:
         "Built and maintained RESTful APIs for contact management—add, list, update, and delete—with stronger reliability. Implemented responsive UI for key flows with HTML, CSS, JavaScript, and React. Collaborated in a five-person team using Java, Spring Boot, React, and MySQL to deliver an integrated smart contact manager. Streamlined MySQL operations for faster reads and writes.",
     },
