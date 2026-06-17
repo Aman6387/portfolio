@@ -8,8 +8,10 @@ const wordSearchRelease =
   "https://github.com/Aman6387/portfolio/releases/tag/WS_V1.0.0";
 const bouncyBallRelease =
   "https://github.com/Aman6387/portfolio/releases/tag/BB_V1.0.0";
+const carRacingRelease =
+  "https://github.com/Aman6387/portfolio/releases/tag/CarRacing01";
 /** Bump when you replace public/resume.pdf so browsers fetch the new file */
-const resumeVersion = "20260609";
+const resumeVersion = "20260617";
 
 export type Project = {
   title: string;
@@ -89,6 +91,51 @@ export const portfolio = {
     },
   ],
   projects: [
+    {
+      title: "Highway Racer 3D",
+      category: "Android · Unity 3D · Endless Racing",
+      featured: true,
+      description:
+        "Highway Racer 3D is a Unity-based endless racing game featuring multiple vehicles, responsive driving mechanics, dynamic environments, high-score tracking, and optimized mobile gameplay. Players navigate through traffic and obstacles while achieving the highest possible distance and speed scores.",
+      features: [
+        "Endless racing gameplay",
+        "Multiple drivable vehicles",
+        "Dynamic environment switching",
+        "Real-time speedometer system",
+        "High-score saving system",
+        "Pause & Resume functionality",
+        "Audio and music settings",
+        "Collision and crash detection",
+        "Vehicle selection menu",
+        "Mobile-friendly controls",
+        "Optimized low-poly art style",
+      ],
+      techStack: [
+        "Unity 6",
+        "C#",
+        "Unity UI",
+        "Rigidbody Physics",
+        "PlayerPrefs",
+        "Mobile Optimization",
+        "Audio Management",
+        "Scene Management",
+      ],
+      tools: ["Unity", "Visual Studio", "Git", "Android Build"],
+      images: [
+        `${base}images/projects/HighwayRacer_1.jpg`,
+        `${base}images/projects/HighwayRacer_2.jpg`,
+        `${base}images/projects/HighwayRacer_3.jpg`,
+        `${base}images/projects/HighwayRacer_4.jpg`,
+        `${base}images/projects/HighwayRacer_5.jpg`,
+        `${base}images/projects/HighwayRacer_6.jpg`,
+        `${base}images/projects/HighwayRacer_7.jpg`,
+      ],
+      video: `${base}images/projects/HighwayRacer.mp4`,
+      link: carRacingRelease,
+      demo: carRacingRelease,
+      github: "https://github.com/Aman6387/portfolio",
+      galleryAspect: "landscape",
+    },
     {
       title: "2D Platformer Adventure Game",
       category: "Android · Unity 2D",

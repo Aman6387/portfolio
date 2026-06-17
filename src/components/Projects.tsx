@@ -3,7 +3,6 @@ import { portfolio, type Project } from "../content/portfolio";
 import { useReveal } from "../hooks/useReveal";
 import {
   MdArrowOutward,
-  MdCheck,
   MdCode,
   MdSportsEsports,
   MdBuild,
@@ -132,14 +131,6 @@ function FeaturedProject({
           <h3>{project.title}</h3>
           <p className="work-cat">{project.category}</p>
           <p className="work-desc">{project.description}</p>
-          <ul className="work-checklist">
-            {project.features.map((item) => (
-              <li key={item}>
-                <MdCheck />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
           <a
             href={projectLiveUrl(project)}
             target="_blank"
