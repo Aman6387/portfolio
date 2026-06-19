@@ -131,6 +131,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.work-gallery-viewport:active {
+  cursor: grabbing;
 }
 
 .work-gallery-viewport img {
@@ -138,6 +146,8 @@
   height: 100%;
   display: block;
   object-fit: contain;
+  pointer-events: none;
+  -webkit-user-drag: none;
 }
 
 .work-gallery-viewport video {

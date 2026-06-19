@@ -15,6 +15,14 @@ import {
 } from "../utils/projectDeepLink";
 import "./Projects.css";
 
+const ASSET_VERSION = "20260619";
+
+function withCacheBust(url: string) {
+  if (!url) return url;
+  const separator = url.includes("?") ? "&" : "?";
+  return `${url}${separator}v=${ASSET_VERSION}`;
+}
+
 function projectLiveUrl(project: Project) {
   return project.demo ?? project.github ?? project.link;
 }
@@ -108,6 +116,43 @@ function FeaturedProject({
   const slug = projectSlug(project.title);
   const videoId = projectVideoHash(slug);
 
+  const pointerStartX = useRef<number | null>(null);
+  const pointerStartY = useRef<number | null>(null);
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (e.button !== 0 && e.pointerType === "mouse") return;
+    pointerStartX.current = e.clientX;
+    pointerStartY.current = e.clientY;
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch (err) {
+      // ignore
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (pointerStartX.current === null || pointerStartY.current === null) return;
+    const diffX = pointerStartX.current - e.clientX;
+    const diffY = pointerStartY.current - e.clientY;
+
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+      if (diffX > 0) {
+        // Swiped left -> next image (wrap-around loop)
+        setActiveShot((prev) => (prev + 1) % galleryItems.length);
+      } else {
+        // Swiped right -> prev image (wrap-around loop)
+        setActiveShot((prev) => (prev - 1 + galleryItems.length) % galleryItems.length);
+      }
+    }
+    pointerStartX.current = null;
+    pointerStartY.current = null;
+  };
+
+  const handlePointerCancel = () => {
+    pointerStartX.current = null;
+    pointerStartY.current = null;
+  };
+
   useEffect(() => {
     const onShowVideo = (event: Event) => {
       const { slug: targetSlug } = (event as CustomEvent<{ slug: string }>).detail;
@@ -145,18 +190,22 @@ function FeaturedProject({
         >
           <div
             className={`work-gallery-viewport work-gallery-viewport--${project.galleryAspect ?? "landscape"}`}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerCancel}
           >
             {activeItem?.type === "video" ? (
               <GalleryVideo
                 id={videoId}
-                src={activeItem.src}
-                poster={activeItem.poster}
+                src={withCacheBust(activeItem.src)}
+                poster={activeItem.poster ? withCacheBust(activeItem.poster) : undefined}
                 title={project.title}
               />
             ) : (
               <img
-                src={activeItem?.src ?? project.images[0]}
+                src={withCacheBust(activeItem?.src ?? project.images[0])}
                 alt={`${project.title} screenshot ${activeShot + 1}`}
+                draggable="false"
               />
             )}
           </div>
@@ -172,11 +221,11 @@ function FeaturedProject({
                 >
                   {item.type === "video" ? (
                     <>
-                      <img src={item.poster ?? project.images[0]} alt="" />
+                      <img src={withCacheBust(item.poster ?? project.images[0])} alt="" draggable="false" />
                       <span className="work-thumb-play" aria-hidden="true" />
                     </>
                   ) : (
-                    <img src={item.src} alt="" />
+                    <img src={withCacheBust(item.src)} alt="" draggable="false" />
                   )}
                 </button>
               ))}
@@ -264,7 +313,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       >
         View project <MdArrowOutward />
       </a>
-      <img src={project.images[0]} alt={project.title} className="work-img" />
+      <img src={withCacheBust(project.images[0])} alt={project.title} className="work-img" draggable="false" />
     </article>
   );
 }
