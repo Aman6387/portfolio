@@ -10,8 +10,10 @@ const bouncyBallRelease =
   "https://github.com/Aman6387/portfolio/releases/tag/BB_V1.0.0";
 const carRacingRelease =
   "https://github.com/Aman6387/portfolio/releases/tag/CarRacing01";
+const cityCarRacingRelease =
+  "https://github.com/Aman6387/portfolio/releases/tag/CityCarRacingGameAPK";
 /** Bump when you replace public/resume.pdf so browsers fetch the new file */
-const resumeVersion = "20260617";
+const resumeVersion = "20260628";
 
 export type Project = {
   title: string;
@@ -91,6 +93,55 @@ export const portfolio = {
     },
   ],
   projects: [
+    {
+      title: "City Car Racing Game 3D",
+      category: "Android · Unity 3D · Physics-based Racing",
+      featured: true,
+      description:
+        "City Car Racing Game 3D is a fully physics-based driving game featuring realistic vehicle handling, suspension simulation, wheel colliders, and dynamic drift mechanics. Players navigate a detailed city environment with responsive controls and realistic collision interactions.",
+      features: [
+        "Fully physics-based vehicle dynamics",
+        "Realistic wheel colliders and suspension simulation",
+        "Active drift mechanics and traction control",
+        "Detailed urban environment for free roaming",
+        "Responsive mobile touch/tilt steering controls",
+        "Multiple camera views (including hood/cockpit cameras)",
+        "Dynamic speedometer and UI indicators",
+        "Destructible environment objects",
+        "Audio system with realistic engine sounds and tire screeches",
+        "Optimized mobile performance and graphics styling",
+      ],
+      techStack: [
+        "Unity 6",
+        "C#",
+        "Rigidbody Physics",
+        "Wheel Colliders",
+        "Mobile Optimization",
+        "Unity UI",
+        "Audio Management",
+        "Scene Management",
+      ],
+      tools: ["Unity", "Visual Studio", "Git", "Android Build"],
+      images: [
+        `${base}images/projects/CityCarRacing_1.jpg`,
+        `${base}images/projects/CityCarRacing_2.jpg`,
+        `${base}images/projects/CityCarRacing_3.jpg`,
+        `${base}images/projects/CityCarRacing_4.jpg`,
+        `${base}images/projects/CityCarRacing_5.jpg`,
+        `${base}images/projects/CityCarRacing_6.jpg`,
+        `${base}images/projects/CityCarRacing_7.jpg`,
+        `${base}images/projects/CityCarRacing_8.jpg`,
+        `${base}images/projects/CityCarRacing_9.jpg`,
+        `${base}images/projects/CityCarRacing_10.jpg`,
+        `${base}images/projects/CityCarRacing_11.jpg`,
+        `${base}images/projects/CityCarRacing_12.jpg`,
+      ],
+      video: `${base}images/projects/CityCarRacing.mp4`,
+      link: cityCarRacingRelease,
+      demo: cityCarRacingRelease,
+      github: "https://github.com/Aman6387/portfolio",
+      galleryAspect: "landscape",
+    },
     {
       title: "Highway Racer 3D",
       category: "Android · Unity 3D · Endless Racing",
